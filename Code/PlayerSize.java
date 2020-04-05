@@ -3,12 +3,12 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class Playersize {
+public class PlayerSize {
 	private int numPlayers;
 	private Player[] players;
 	//private Card[] hand;
 	
-	public Playersize() {
+	public PlayerSize() {
 	numPlayers = 0;
 	players = new Player[6]; //max size of player for game = 6
 	}
