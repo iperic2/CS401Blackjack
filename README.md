@@ -1,4 +1,10 @@
 # CS401Blackjack
+-------------------------
+Roles & Responsibilites w/ Updates: https://docs.google.com/document/d/1ecXmxuBq6DZpCjdo3T9m6PfCaqwJqNzl_P_8HXUKytE/edit?usp=sharing
+
+Gantt Chart w/ Updates: https://docs.google.com/spreadsheets/d/1LKqGcty8DsAUTnd45nZ5heXQhmTGYyjeKCqHW-VReuc/edit?usp=sharing
+
+-------------------------
 
 Updated README:
 
