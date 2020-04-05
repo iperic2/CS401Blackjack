@@ -7,11 +7,17 @@ Games and account management will occur on a website. [Expand to mobile app in t
 
 Product Architecture (From SRS Doc:)
 Card Object - makes card class objects, initialize a private integer, cardValue, and a private string variable, suit, and contains method for setting the values of the variables.
+
 Deck Object - creates an array of 52 card objects, has a draw function to randomly pass out two cards to each player. 
+
 Player Object – creates a player object that handles all user containers.
+
 Money Object – Contain the Initial amount of chips for each user. Creates an accumulating money object for each user.
+
 Rule Database – Contains all the rules of the game and decides which user wins.
+
 Authentication Database - Prompts users to either create a new account or authenticate account, load previous money object if returning player or creates new player object.
+
 
 Refer to SRS Requirements Document for detailed information on implementation.
 
