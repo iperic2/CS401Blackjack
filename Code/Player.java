@@ -1,3 +1,7 @@
+	/*
+		Player Object – creates a player object that handles all user containers.
+	*/
+
 
 public class Player {
 	private String username;   // name of player and username 

@@ -1,4 +1,10 @@
+	/*
+		Money Object – Contain the Initial amount of chips for each user. 
+		Creates an accumulating money object for each user.
+	*/
+
 public class Money {
+	//set a default simulated chip value -- $500 starting amt?
 
 	int chips; 	// chips given to a player
 
