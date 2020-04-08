@@ -46,25 +46,32 @@ public class Player {
 		// set hand
 	}
 
+	/* Does this method return the number of cards for the player?
 	public double getHandSize()
 	{
+
 		return handSize;
 	}
+	*/
 
+	/* Need to declare Card class first
 	public void setHand(card c)
 	{
 		card = c;
 	}
+	*/
 
 	public void Display()
 	{
 		// display???
 	}
 
+	/* What does this method do?
 	public double sizeLimit()
 	{
 		// return or set?
 	}
+	*/
 
 	public String toString()
 	{
