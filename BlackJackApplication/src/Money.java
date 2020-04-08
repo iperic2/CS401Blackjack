@@ -1,12 +1,12 @@
-Public class Money {
+public class Money {
 
 	int chips; 	// chips given to a player
 
 
 	// setting values for chips
-	public void setInitialValue(v) {
+	public void setInitialValue() {
 
-	
+
 	}
 
 
@@ -21,7 +21,7 @@ Public class Money {
 	// for when they player loses their money is decreased
 	public void decreaseMoney() {
 
-	
+
 	}
 
 	
@@ -32,3 +32,4 @@ Public class Money {
 
 		
 	}
+}
