@@ -1,46 +1,5 @@
 # CS401Blackjack
 -------------------------
-
-RESPONSIBILITIES
-Phase 5
-Ensure Skeleton Classes are complete
-Create a software test plan
-Document proposed test cases
-Plan out project test suite
-Begin coding jUnit tests (have at least one or more of a basic test using jUnit ready by due date)
-Begin planning and creating prototypes
-
-
-Deliverables:
-Project Status Report
-Individual Git Log
-Link to GitHub Repo
-Names of team members
-Phase 5 Roles:
-
-Yew: 
-Check class UML document: does it make sense? Update if necessary. Complete by end of day Thursday.
-
-Avin: 
-Check Requirements document: is it complete? Update if necessary. Complete by end of day Thursday.
-updated player.java
-
-Ivan: 
-Start a jUnit testing doc: complete rough version by Thursday end of day; get feedback
-update gantt chart with - jUnit tests, jUnit docs, jUnit test suite class
-update roles doc
-
-For grabs:
- Ensure Skeleton Classes are complete [rough draft is OK]] 
-Build Test Suite [rough version, just a starter]. 
-Test that all constructors are not null. 
-Test all other available functions work as intended. 
-Come up with test cases which could break the program.
-Begin planning & creating prototypes
-Offline GUI or Command line version of the game
-
-
--------------------------
 Roles & Responsibilites w/ Updates: https://docs.google.com/document/d/1ecXmxuBq6DZpCjdo3T9m6PfCaqwJqNzl_P_8HXUKytE/edit?usp=sharing
 
 Gantt Chart w/ Updates: https://docs.google.com/spreadsheets/d/1LKqGcty8DsAUTnd45nZ5heXQhmTGYyjeKCqHW-VReuc/edit?usp=sharing
