@@ -10,26 +10,62 @@ public class Player {
 		this.password = password;
 		this.money = money;
 	}
+
 	public void setUsername(String user)
 	{
 		this.username = user;
 	}
+
 	public String getUsername()
 	{
 		return username;
 	}
-	public void setPassword(String pasword)
+
+	public void setPassword(String password)
 	{
-		password = pasword;
+		password = password;
 	}
+
 	public String getPassword()
 	{
 		return password;
 	}
+
 	public double getCurrentMoney()
 	{
 		return money;
 	}
+
+	public void onCreatePlayer()
+	{
+		// create player
+	}
+
+	public void setHand()
+	{
+		// set hand
+	}
+
+	public double getHandSize()
+	{
+		return handSize;
+	}
+
+	public void setHand(card c)
+	{
+		card = c;
+	}
+
+	public void Display()
+	{
+		// display???
+	}
+
+	public double sizeLimit()
+	{
+		// return or set?
+	}
+
 	public String toString()
 	{
 		return username + " " + password +" " + money;
