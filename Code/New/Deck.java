@@ -1,11 +1,5 @@
-	/*
-		Deck Object - creates an array of 52 card objects, 
-		has a draw function to randomly pass out two cards to each player.
-	*/
 
 public class Deck extends Card{
-
-	private Card[] DOC = new Card[52];
 
 	public void newDeck() {
 		//pre-condition: no deck object is created
@@ -22,7 +16,7 @@ public class Deck extends Card{
 		//pre-condition: total value of cards in user's hand does not exceed 21
 		//post-condition: adds a new card to the player
 		return c;
-	} 
+	}
 	
 	
 	public void stopDraw() {
@@ -44,5 +38,6 @@ public class Deck extends Card{
 		//pre-condition: Receives a deck of 52 cards
 		//post-condition: randomizes order of the deck
 	}
-
+	private
+		Card[] DOC =  new Card[52];
 }
