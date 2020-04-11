@@ -3,6 +3,10 @@ public class Game
 	// number of players
 	private int numPlayer;
 
+	public void setNumPlayer(int numPlayer) {
+		this.numPlayer = numPlayer;
+	}
+
 	// return number of players
 	public int getPlayer()
 	{

@@ -10,6 +10,12 @@ public class Card {
 		value = 0;
 	}
 
+	public Card(String suit, String rank, int value) {
+		this.suit = suit;
+		this.rank = rank;
+		this.value = value;
+	}
+
 	public void setSuit(String suit) {
 		this.suit = suit;
 	}

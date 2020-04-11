@@ -3,10 +3,22 @@ public class Hand
 	// hand full of cards
 	private Card[] hand;
 
-	// not sure what this is suppose to do
-	public void handValue()
-	{
+	public Hand() {
+	    hand = new Card[0];
+    }
 
+    public Hand(Card[] hand) {
+        this.hand = hand;
+    }
+
+    // return hand value
+	public int handValue()
+	{
+	    int value = 0;
+        for(int i = 0; i < hand.length; ++i) {
+            value += hand[i].getValue();
+        }
+        return value;
 	}
 
 	// draw card
@@ -15,15 +27,15 @@ public class Hand
 
 	}
 
-	// checks if hand is blackjack, perhaps change to boolean?
-	public void isBlackJack()
+	// checks if hand is blackjack
+	public boolean isBlackJack()
 	{
-
+        return handValue() == 21;
 	}
 
-	// check if hand is bust, perhaps change to boolean?
-	public void isBust()
+	// check if hand is bust
+	public boolean isBust()
 	{
-
+        return handValue() > 21;
 	}
 }
