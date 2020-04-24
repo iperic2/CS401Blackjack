@@ -1,12 +1,48 @@
+import java.util.Collections;
+import java.util.Arrays;
+import java.util.Vector;
 
-public class Deck extends Card{
+public class Deck {
+
+	private Card[] cards;
+	private final static int arraySize = 52;
+	private int currentIndex;
+
+	public Deck() {
+		cards = new Card[arraySize];
+		currentIndex = 0;
+		newDeck();
+	}
 
 	public void newDeck() {
-		//pre-condition: no deck object is created
-		//post-condition: creates a deck deck object
-		Deck another = new Deck();
+		currentIndex = 0;
+		int i = 0;
+		for(Suit suit: Suit.values())
+			for(Rank rank: Rank.values())
+					cards[i++] = new Card(suit, rank, rank.getValue());
 	}
-	
+
+	public void shuffleDeck() {
+		Collections.shuffle(Arrays.asList(cards));
+	}
+
+	public Hand initHand() {
+		Hand hand = new Hand();
+		hand.addCard(cards[currentIndex++]);
+		return hand;
+	}
+
+	public Card distributeCard() {
+		return cards[currentIndex++];
+	}
+
+	public String toString() {
+		String allCards = "";
+		for(Card card : cards)
+			allCards += card.toString();
+		return allCards;
+	}
+
 	public void getCard(Card c) {
 		//pre-condition: users has no card in hand
 		//post-condition: users get two card randomly in hand
@@ -38,6 +74,5 @@ public class Deck extends Card{
 		//pre-condition: Receives a deck of 52 cards
 		//post-condition: randomizes order of the deck
 	}
-	private
-		Card[] DOC =  new Card[52];
+
 }

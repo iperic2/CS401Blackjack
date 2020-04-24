@@ -1,30 +1,46 @@
+import java.util.Vector;
+import java.util.Collections;
+import java.util.Comparator;
+
+
 public class Hand
 {
 	// hand full of cards
-	private Card[] hand;
+	private Vector<Card> hand;
 
 	public Hand() {
-	    hand = new Card[0];
+	    hand = new Vector<>();
     }
 
-    public Hand(Card[] hand) {
+    public Hand(Vector<Card> hand) {
         this.hand = hand;
     }
 
     // return hand value
 	public int handValue()
 	{
+		Comparator c = Collections.reverseOrder(new SortHandDescending());
+		Collections.sort(hand, c);
 	    int value = 0;
-        for(int i = 0; i < hand.length; ++i) {
-            value += hand[i].getValue();
+        for(int i = 0; i < hand.size(); ++i) {
+        	if(hand.get(i).getRank() == Rank.ACE && value < 10)
+        		value += 11;
+        	else
+            	value += hand.get(i).getValue();
         }
         return value;
 	}
 
-	// draw card
-	public void drawCard()
-	{
+	public class SortHandDescending implements Comparator<Card> {
+		public int compare(Card a, Card b) {
+			return a.getValue() - b.getValue();
+		}
+	}
 
+	// draw card
+	public void addCard(Card card)
+	{
+		hand.add(card);
 	}
 
 	// checks if hand is blackjack
@@ -38,4 +54,20 @@ public class Hand
 	{
         return handValue() > 21;
 	}
+
+	public String dealerCard() {
+		return hand.elementAt(0).toString();
+	}
+
+	public int dealerValue() {
+		return hand.elementAt(0).getValue();
+	}
+
+	public String toString() {
+		String cards = "";
+		for(int i = 0; i < hand.size(); ++i)
+			cards += hand.elementAt(i).toString();
+		return cards;
+	}
+
 }
