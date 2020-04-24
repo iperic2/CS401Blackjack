@@ -10,13 +10,17 @@ public class Balance {
 		newUser = false;
 	}
 
+	public Balance(double amount) {
+		this.amount = new BigDecimal(amount);
+	}
+
 	public Balance (double amount, boolean newUser) {
 		this.amount = new BigDecimal(amount);
 		this.newUser = newUser;
 	}
 
-	public void setAmount(double amount) {
-		this.amount = new BigDecimal(amount);
+	public void setBalance(BigDecimal amount) {
+		this.amount = this.amount.add(amount);
 	}
 
 	public BigDecimal getAmount() {

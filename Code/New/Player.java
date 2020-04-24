@@ -1,13 +1,16 @@
-public class Player {
+import java.math.BigDecimal;
+
+public class Player extends User{
 	private String username;   // name of player and username 
 	private String password;	// password for player
-	private double money;		//amount of money of player
+	private Balance balance;		//amount of money of player
+	private Hand hand;
 	
-	public Player(String username,String password, double money)
+	public Player(String username,String password, Balance balance)
 	{
 		this.username = username;
 		this.password = password;
-		this.money = money;
+		this.balance = balance;
 	}
 
 	public void setUsername(String user)
@@ -30,9 +33,13 @@ public class Player {
 		return password;
 	}
 
-	public double getCurrentMoney()
+	public void setBalance(BigDecimal amount) {
+		this.balance.setBalance(amount);
+	}
+
+	public BigDecimal getBalance()
 	{
-		return money;
+		return balance.getAmount();
 	}
 
 	public void onCreatePlayer()
@@ -40,9 +47,9 @@ public class Player {
 		// create player
 	}
 
-	public void setHand()
+	public void setHand(Hand hand)
 	{
-		// set hand
+		this.hand = hand;
 	}
 
 	/* Does this method return the number of cards for the player?
@@ -74,6 +81,6 @@ public class Player {
 
 	public String toString()
 	{
-		return username + " " + password +" " + money;
+		return username + " " + password +" " + balance;
 	}
 }

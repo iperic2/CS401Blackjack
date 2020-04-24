@@ -1,4 +1,7 @@
 import org.junit.Test;
+
+import java.util.Vector;
+
 import static org.junit.Assert.*;
 
 public class HandTest {
@@ -13,20 +16,20 @@ public class HandTest {
 
     @Test
     public void testBlackjack() {
-        Card[] cards = new Card[3];
-        cards[0] = new Card("Spade", "Ace", 1);
-        cards[1] = new Card("Heart", "King", 10);
-        cards[2] = new Card("Diamond", "Queen", 10);
+        Vector<Card> cards = new Vector<>();
+        cards.add(new Card(Suit.SPADE, Rank.ACE, 1));
+        cards.add(new Card(Suit.HEART, Rank.KING, 10));
+        cards.add(new Card(Suit.DIAMOND, Rank.QUEEN, 10));
         Hand startingHand = new Hand(cards);
         assertTrue(startingHand.isBlackJack());
     }
 
     @Test
     public void testBust() {
-        Card[] cards = new Card[3];
-        cards[0] = new Card("Spade", "Six", 6);
-        cards[1] = new Card("Heart", "Eight", 8);
-        cards[2] = new Card("Diamond", "Nine", 9);
+        Vector<Card> cards = new Vector<>();
+        cards.add(new Card(Suit.SPADE, Rank.SIX, 6));
+        cards.add(new Card(Suit.HEART, Rank.EIGHT, 8));
+        cards.add(new Card(Suit.CLUB, Rank.NINE, 9));
         Hand startingHand = new Hand(cards);
         assertTrue(startingHand.isBust());
     }
