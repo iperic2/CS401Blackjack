@@ -1,6 +1,8 @@
 import java.util.Vector;
 import java.util.Scanner;
 import java.math.BigDecimal;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Game
 {
@@ -120,9 +122,33 @@ public class Game
 		
 	}
 
+	static int interval;
+	static Timer timer;
+	
 	// countdown
 	public void countdown()
 	{
+		int delay = 1000;
+		int period = 1000;
+		int seconds = 10;
+		timer = new Timer();
+		interval = seconds;
+		System.out.println(seconds);
+		timer.scheduleAtFixedRate(new TimerTask()
+			{	
+	        	public void run()
+	        	{
+	        		System.out.println(setInterval());
+	        	}
+			}, delay, period);
+	}
+	
+	// because countdown needs to literally count down.
+	private static final int setInterval()
+	{
+		if (interval == 1)
+		timer.cancel();
 
+		return --interval;
 	}
 }
