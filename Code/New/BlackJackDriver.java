@@ -7,7 +7,7 @@ public class BlackJackDriver {
     frame.display();*/
 
     Vector<Player> players = new Vector<>();
-    players.add(new Player("Alex", "abc", new Balance(1000, true)));
+    players.add(new Player("Alex", "abc", new Balance(2500, true)));
     Dealer dealer = new Dealer();
     Game game = new Game(dealer, players, 1);
     game.newTable();
