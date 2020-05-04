@@ -1,6 +1,7 @@
 <?php
 
   //this code will connect to mysql db for log-in
+  //Note: can change the dbname / db_user / db_pass for final version
 
   $dsn = 'mysql:host=localhost;dbname=ivan_db';
   $db_user = 'ivan_p';
