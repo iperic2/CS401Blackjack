@@ -17,6 +17,15 @@ public class BlackJackGUI extends JPanel {
 
   JTextPane playerMoney = new JTextPane();
 
+    //Labels for card visuals
+    JLabel playerCard1;
+    JLabel playerCard2;
+    JLabel playerCardHit;
+    JLabel dealerCard0;
+    JLabel dealerCard1;
+    JLabel dealerCard2;
+    JLabel dealerCardHit;
+
     //GUI constructor
     public BlackJackGUI (){
         
@@ -51,10 +60,13 @@ public class BlackJackGUI extends JPanel {
         topPanel.add(holdButton);
 
         dealerPanel.add(dealerLabel);
+        //adding card visuals to dealer panel
+        dealerCard0 = new JLabel(new ImageIcon("CardImages/back.jpg"));
+        dealerPanel.add(dealerCard0);
 
         playerPanel.add(playerLabel);
         playerPanel.add(currentMoney);
-        playerMoney.setText("$1000"); //current acct's money should display here
+        playerMoney.setText("$2000"); //current acct's money should display here
         playerMoney.setFont(new java.awt.Font("Arial Bold", 1, 20));
         playerPanel.add(playerMoney);
         
@@ -80,6 +92,8 @@ public class BlackJackGUI extends JPanel {
     class dealButton implements ActionListener { 
         public void actionPerformed(ActionEvent e) {
             //insert method
+            dealerCard0 = new JLabel(new ImageIcon("back.jpg"));
+            dealerPanel.add(dealerCard0);
         }
     }
 
