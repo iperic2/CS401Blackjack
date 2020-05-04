@@ -15,6 +15,17 @@ class RulesTest
 		assertNotNull(tester);		
 	}
 
+	@Test
+	public void equalToNotNull()
+	{
+		// return 0 if equal
+		int playerValue = 21;
+		int dealerValue = 21;
+		
+		Rules tester = new Rules(dealerValue, playerValue);
+		
+		assertNotNull(0, tester.gameOutcome());
+	}
 	
 	// the 3 below are to make sure each outcome returns the expected return.
 	@Test
