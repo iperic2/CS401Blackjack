@@ -24,7 +24,7 @@ class RulesTest
 		
 		Rules tester = new Rules(dealerValue, playerValue);
 		
-		assertNotNull(0, tester.gameOutcome());
+		assertNotNull(tester.gameOutcome());
 	}
 	
 	// the 3 below are to make sure each outcome returns the expected return.
