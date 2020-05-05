@@ -14,9 +14,6 @@ class DealerTest
 		assertNotNull(deal);
 	}
 	
-
-	// for some reason, this is failing.
-	// to be worked on.
 	@Test
 	public void setIsEqualToGet()
 	{
@@ -24,13 +21,26 @@ class DealerTest
 		
 		String ID = "Iron Man";
 		
-		deal.setDealerID("ID");
+		deal.setDealerID(ID);
 		
 		assertEquals(ID, deal.getDealerID());
 	}
+	
+	@Test
+	public void setDealerIDIsNotNull()
+	{
+		Dealer deal = new Dealer();
+		
+		String ID = "Iron Man";
+		
+		deal.setDealerID(ID);
+		
+		assertNotNull(deal.getDealerID());
+	}
+	
 
 	@Test
-	public void handIsNotNull()
+	public void setHandIsNotNull()
 	{
 		Vector<Card> cards = new Vector<>();
 		Hand hand = new Hand(cards);
