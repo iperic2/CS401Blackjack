@@ -23,21 +23,29 @@ public class CardTest
     @Test
     public void suitIsEqualToGet()
     {
-    	Card aceSpade = new Card(Suit.SPADE, Rank.ACE, 1);
-        assertEquals(Suit.SPADE, aceSpade.getSuit());
+    	Card tester = new Card(Suit.SPADE, Rank.ACE, 1);
+        assertEquals(Suit.SPADE, tester.getSuit());
     }
     
     @Test
     public void rankIsEqualToGet()
     {
-    	Card aceSpade = new Card(Suit.SPADE, Rank.ACE, 1);
-        assertEquals(Rank.ACE, aceSpade.getRank());
+    	Card tester = new Card(Suit.SPADE, Rank.ACE, 1);
+        assertEquals(Rank.ACE, tester.getRank());
     }
     
     @Test
     public void valueIsEqualToGet()
     {
-    	Card aceSpade = new Card(Suit.SPADE, Rank.ACE, 1);
-        assertEquals(1, aceSpade.getValue());
+    	Card tester = new Card(Suit.SPADE, Rank.ACE, 1);
+        assertEquals(1, tester.getValue());
+    }
+    
+    @Test
+    public void ToStringReturnsNotNull()
+    {
+    	Card tester = new Card(Suit.SPADE, Rank.ACE, 1);
+    	
+    	assertNotNull(tester.toString());
     }
 }
