@@ -2,15 +2,18 @@ public class User {
 
     private String username;
     private String password;
+    private String email;
 
     public User() {
         username = "";
         password = "";
+        email = "";
     }
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+        this.email = email;
     }
 
     public void setUsername(String username) {
@@ -21,6 +24,10 @@ public class User {
         this.password = password;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -29,8 +36,8 @@ public class User {
         return password;
     }
 
-    private void verifyLogin(String username, String password) {
-
+    public String getEmail() {
+        return email;
     }
 
 }
