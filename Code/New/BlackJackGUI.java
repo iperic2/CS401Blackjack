@@ -19,6 +19,7 @@ public class BlackJackGUI extends JPanel {
         homeFrame.add(loginButton);
         homeFrame.setSize(300, 300);
         homeFrame.setLayout(null);
+        homeFrame.setLocationRelativeTo(null);
         homeFrame.setVisible(true);
         homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -29,7 +30,7 @@ public class BlackJackGUI extends JPanel {
                 if(!login())
                     homeFrame.setVisible(true);
                 else
-                    display();
+                    menu();
             }
         });
 
@@ -40,7 +41,7 @@ public class BlackJackGUI extends JPanel {
                 if(!register())
                     homeFrame.setVisible(true);
                 else
-                    display();
+                    menu();
             }
         });
 
@@ -144,6 +145,40 @@ public class BlackJackGUI extends JPanel {
             return true;
     }
 
+    public void menu() {
+        JFrame menuFrame = new JFrame("Main Menu");
+        JButton playButton = new JButton("Play");
+        JButton profileButton = new JButton("Profile");
+        playButton.setBounds(100, 50, 100, 50);
+        profileButton.setBounds(100, 150, 100, 50);
+        menuFrame.add(playButton);
+        menuFrame.add(profileButton);
+        menuFrame.setSize(800, 800);
+        menuFrame.setLayout(null);
+        menuFrame.setLocationRelativeTo(null);
+        menuFrame.setVisible(true);
+        menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        playButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                menuFrame.setVisible(false);
+                display();
+            }
+        });
+
+        profileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                menuFrame.setVisible(false);
+                profile();
+            }
+        });
+    }
+
+    public void profile() {
+
+    }
 
     // In-game GUI
     public void inGame() {
