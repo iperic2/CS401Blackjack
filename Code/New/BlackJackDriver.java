@@ -5,10 +5,10 @@ public class BlackJackDriver
 {
 	public static void main(String[] args)
 	{
-		/*BlackJackGUI frame = new BlackJackGUI();
-		frame.display();*/
+		BlackJackGUI frame = new BlackJackGUI();
+		frame.inGame();
 
-		Scanner scan = new Scanner(System.in);
+		/*Scanner scan = new Scanner(System.in);
 		
 		System.out.println("How many players?");
 		int playerNum = scan.nextInt();
@@ -28,6 +28,6 @@ public class BlackJackDriver
 		cards.add(new Card(Suit.CLUB, Rank.ACE, Rank.ACE.getValue()));
 		cards.add(new Card(Suit.DIAMOND, Rank.ACE, Rank.ACE.getValue()));
 		Hand hand = new Hand(cards);
-		System.out.println(hand.handValue());
+		System.out.println(hand.handValue());*/
 	}
 }
