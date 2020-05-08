@@ -182,11 +182,15 @@ public class BlackJackGUI extends JPanel {
 
     // In-game GUI
     public void inGame() {
-
+        //to do: requires better alignment for panels 
+        //ex: place bets & text field should be aligned left side of the window
+        //needs actual game methods, randomly generated card display, win conditions, etc
+        
         JPanel topPanel = new JPanel(); //button panel on top
         JPanel dealerPanel = new JPanel(); //dealer's cards panel in middle
         JPanel playerPanel = new JPanel(); //player's cards panel on bottom
 
+        JButton betButton = new JButton();
         JButton dealButton = new JButton();
         JButton hitButton = new JButton();
         JButton holdButton = new JButton();
@@ -194,14 +198,15 @@ public class BlackJackGUI extends JPanel {
         JLabel dealerLabel = new JLabel();
         JLabel playerLabel = new JLabel();
         JLabel currentMoney = new JLabel();
+        JLabel placeBets = new JLabel();
 
         JTextPane playerMoney = new JTextPane();
+        JTextPane betMoney = new JTextPane();
 
         //Labels for card visuals
         JLabel playerCard1;
         JLabel playerCard2;
         JLabel playerCardHit;
-        JLabel dealerCard0;
         JLabel dealerCard1;
         JLabel dealerCard2;
         JLabel dealerCardHit;
@@ -211,14 +216,16 @@ public class BlackJackGUI extends JPanel {
         playerPanel.setBackground(new Color(0, 125, 0));
 
         topPanel.setLayout(new FlowLayout());
+        //testing different layouts below
+        //BoxLayout bl = new BoxLayout(playerPanel, BoxLayout.LINE_AXIS);
+        //playerPanel.setLayout(bl);
 
+        betButton.setText("Bet");
         dealButton.setText("Deal");
-        dealButton.addActionListener(new dealButton()); //performs dealButton method
+        dealButton.setEnabled(false);
         hitButton.setText("Hit");
-        hitButton.addActionListener(new hitButton());
         hitButton.setEnabled(false);
         holdButton.setText("Hold");
-        holdButton.addActionListener(new holdButton());
         holdButton.setEnabled(false);
 
         dealerLabel.setText("Dealer: ");
@@ -227,34 +234,43 @@ public class BlackJackGUI extends JPanel {
         playerLabel.setText("Player: ");
         playerLabel.setFont(new java.awt.Font("Arial Bold", 1, 20));
         playerLabel.setForeground(Color.black);
+        placeBets.setText("Place bets: ");
+        placeBets.setFont(new java.awt.Font("Arial Bold", 1, 20));
+        placeBets.setForeground(Color.black);
         currentMoney.setText("Money: ");
         currentMoney.setFont(new java.awt.Font("Arial Bold", 1, 20));
         currentMoney.setForeground(Color.black);
         //currentMoney.setHorizontalAlignment(SwingConstants.RIGHT);
 
+        topPanel.add(placeBets);
+        betMoney.setText("$500"); //user should input bets here
+        betMoney.setFont(new java.awt.Font("Arial Bold", 1, 20));
+        topPanel.add(betMoney);
+        //placeBets.setHorizontalAlignment(SwingConstants.LEFT);
+        //placeBets.setVerticalAlignment(SwingConstants.BOTTOM);
+
+        topPanel.add(betButton);
         topPanel.add(dealButton);
         topPanel.add(hitButton);
         topPanel.add(holdButton);
 
         dealerPanel.add(dealerLabel);
-        //adding card visuals to dealer panel
-        dealerCard0 = new JLabel(new ImageIcon("CardImages/back.jpg"));
-        dealerPanel.add(dealerCard0);
 
-        playerPanel.add(playerLabel);
+        currentMoney.setAlignmentX(LEFT_ALIGNMENT);
         playerPanel.add(currentMoney);
-        playerMoney.setText("$2000"); //current acct's money should display here
+        playerMoney.setText("$2500"); //current acct's money should display here
         playerMoney.setFont(new java.awt.Font("Arial Bold", 1, 20));
         playerPanel.add(playerMoney);
+
+        playerPanel.add(playerLabel);
+
         
         setLayout(new BorderLayout());
         add(topPanel,BorderLayout.NORTH);
         add(dealerPanel,BorderLayout.CENTER);
         add(playerPanel,BorderLayout.SOUTH);
-    }
 
-    //display GUI method
-    public void display(){
+        //Displays in-game GUI
         JFrame myFrame = new JFrame("BlackJack");
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         myFrame.setContentPane(this);
@@ -262,26 +278,54 @@ public class BlackJackGUI extends JPanel {
 
         myFrame.pack();
         myFrame.setVisible(true);
-    }
 
-    class dealButton implements ActionListener { 
+        //Button Methods below
+        betButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                myFrame.setVisible(false);
+                //insert method for updating bet money
+                dealButton.setEnabled(true);
+                betButton.setEnabled(false);
+                myFrame.setVisible(true);
+            }
+         });
+
+        playerCard1 = new JLabel(new ImageIcon("CardImages/back.jpg"));
+        playerCard2 = new JLabel(new ImageIcon("CardImages/back.jpg"));
+        playerCardHit = new JLabel(new ImageIcon("CardImages/back.jpg")); //should be a randomly generated card
+        dealerCard1 = new JLabel(new ImageIcon("CardImages/back.jpg"));
+        dealerCard2 = new JLabel(new ImageIcon("CardImages/back.jpg"));
+        dealerCardHit = new JLabel(new ImageIcon("CardImages/back.jpg")); //should be a randomly generated card
+
+        dealButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            //insert method
-            //dealerCard0 = new JLabel(new ImageIcon("back.jpg"));
-            //dealerPanel.add(dealerCard0);
-        }
-    }
+                myFrame.setVisible(false);
+                dealerPanel.add(dealerCard1);
+                dealerPanel.add(dealerCard2);
+                playerPanel.add(playerCard1);
+                playerPanel.add(playerCard2);
+                hitButton.setEnabled(true);
+                holdButton.setEnabled(true);
+                dealButton.setEnabled(false);
+                myFrame.setVisible(true);
+            }
+        });
 
-    class hitButton implements ActionListener { 
+        hitButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            //insert method
-        }
-    }
+                myFrame.setVisible(false);
+                playerPanel.add(playerCardHit);
+                myFrame.setVisible(true);
+            }
+        });
 
-    class holdButton implements ActionListener { 
-        public void actionPerformed(ActionEvent e) {
-            //insert method
-        }
-    }
+        holdButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                    myFrame.setVisible(false);
+                    dealerPanel.add(dealerCardHit);
+                    myFrame.setVisible(true);
+                }
+            });
 
+    }
 }
