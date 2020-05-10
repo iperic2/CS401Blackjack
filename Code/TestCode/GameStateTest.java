@@ -14,7 +14,6 @@ class GameStateTest
 		assertNotNull(state);
 	}
 	
-	
 	@Test
 	public void dealerHandIsNotNull()
 	{
