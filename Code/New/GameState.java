@@ -1,32 +1,33 @@
+import java.math.BigDecimal;
 import java.util.HashMap;
 
-public class GameState
-{
+public class GameState {
+
     private Hand dealerHand;
-    private HashMap<String, Hand> playersHands;
+    private HashMap<String, Player> players;
 
-    public GameState(Hand dHand, HashMap<String, Hand> psHands)
-    {
+    public GameState(Hand dHand, HashMap<String, Player> players) {
         this.dealerHand = dHand;
-        this.playersHands = psHands;
+        this.players = players;
     }
 
-    public void UpdateDealerHand(Hand dHand)
-    {
+    public void setDealerHand(Hand dHand) {
         this.dealerHand = dHand;
     }
 
-    public void UpdatePlayerHand(Hand pHand, String username)
-    {
-        this.playersHands.replace(username, pHand);
+    public void setPlayerHand(Hand pHand, String username) {
+        this.players.get(username).setHand(pHand);
     }
 
-    public Hand GetDealerHand()
-    {
+    public void setPlayerBalance(BigDecimal pBalance, String username) {
+        this.players.get(username).setBalance(pBalance);
+    }
+
+    public Hand getDealerHand() {
         return dealerHand;
     }
-    public HashMap<String, Hand> GetPlayersHands()
-    {
-        return playersHands;
+    public HashMap<String, Player> getPlayers() {
+        return players;
     }
+
 }
