@@ -4,13 +4,11 @@ public class GameState
 {
     private Hand dealerHand;
     private HashMap<String, Hand> playersHands;
-    private HashMap<String, Balance> playersBalance;
 
-    public GameState(Hand dHand, HashMap<String, Hand> psHands, HashMap<String, Balance> psBalance)
+    public GameState(Hand dHand, HashMap<String, Hand> psHands)
     {
         this.dealerHand = dHand;
         this.playersHands = psHands;
-        this.playersBalance = psBalance;
     }
 
     public void UpdateDealerHand(Hand dHand)
@@ -23,11 +21,6 @@ public class GameState
         this.playersHands.replace(username, pHand);
     }
 
-    public void UpdatePlayerBalance(Balance pBalance, String username)
-    {
-        this.playersBalance.replace(username, pBalance);
-    }
-
     public Hand GetDealerHand()
     {
         return dealerHand;
@@ -36,10 +29,4 @@ public class GameState
     {
         return playersHands;
     }
-
-    public HashMap<String, Balance> GetPlayersBalance()
-    {
-        return playersBalance;
-    }
-    
 }
