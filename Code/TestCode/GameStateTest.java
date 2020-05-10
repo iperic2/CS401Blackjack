@@ -8,7 +8,7 @@ class GameStateTest
 	public void constructorIsNotNull()
 	{
 		Hand dealerHand = new Hand();
-		HashMap<String, Hand> playersHand = new HashMap<>();
+		HashMap<String, Player> playersHand = new HashMap<>();
 		GameState state = new GameState(dealerHand, playersHand);
 
 		assertNotNull(state);
@@ -19,26 +19,21 @@ class GameStateTest
 	public void dealerHandIsNotNull()
 	{
 		Hand dealerHand = new Hand();
-		HashMap<String, Hand> playersHand = new HashMap<>();
+		HashMap<String, Player> playersHand = new HashMap<>();
 		GameState state = new GameState(dealerHand, playersHand);
 		
-		state.UpdateDealerHand(dealerHand);
+		assertNotNull(state.getDealerHand());
 		
-		assertNotNull(state.GetDealerHand());
 	}
 
 	@Test
 	public void playerHandIsNotNull()
 	{
 		Hand dealerHand = new Hand();
-		HashMap<String, Hand> playersHand = new HashMap<>();
+		HashMap<String, Player> playersHand = new HashMap<>();
 		GameState state = new GameState(dealerHand, playersHand);
 		
-		String user = "user";
-		
-		state.UpdatePlayerHand(playersHand, user); // not working. to be worked on
-		
-		assertNotNull(state.GetPlayersHands());	
+		assertNotNull(state.getPlayers());
 	}
 	
 	// below are to be worked on. 
@@ -46,7 +41,7 @@ class GameStateTest
 	public void getDealerHandReturnsExpected()
 	{
 		Hand dealerHand = new Hand();
-		HashMap<String, Hand> playersHand = new HashMap<>();
+		HashMap<String, Player> playersHand = new HashMap<>();
 		GameState state = new GameState(dealerHand, playersHand);
 		
 		assertEquals(); // work on this
@@ -56,7 +51,7 @@ class GameStateTest
 	public void getPlayersHandsReturnsExpected()
 	{
 		Hand dealerHand = new Hand();
-		HashMap<String, Hand> playersHand = new HashMap<>();
+		HashMap<String, Player> playersHand = new HashMap<>();
 		GameState state = new GameState(dealerHand, playersHand);
 		
 		assertEquals(); // work on this
