@@ -3,7 +3,8 @@ import java.util.HashMap;
 import org.junit.jupiter.api.Test;
 
 class GameStateTest
-{	
+{
+	// Test constructor is not null.
 	@Test
 	public void constructorIsNotNull()
 	{
@@ -14,6 +15,7 @@ class GameStateTest
 		assertNotNull(state);
 	}
 	
+	// Test that dealer hand is not null.
 	@Test
 	public void dealerHandIsNotNull()
 	{
@@ -25,6 +27,7 @@ class GameStateTest
 		
 	}
 
+	// Test player hand is not null.
 	@Test
 	public void playerHandIsNotNull()
 	{
@@ -35,7 +38,7 @@ class GameStateTest
 		assertNotNull(state.getPlayers());
 	}
 	
-	// below are to be worked on. 
+	// Test that dealer hand returns expected.
 	@Test
 	public void getDealerHandReturnsExpected()
 	{
@@ -46,6 +49,7 @@ class GameStateTest
 		assertEquals(); // work on this
 	}
 	
+	// Test that player hand returns expected.
 	@Test
 	public void getPlayersHandsReturnsExpected()
 	{
