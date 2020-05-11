@@ -1,8 +1,11 @@
+import org.junit.Test;
+import static org.junit.Assert.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.Scanner;
 import org.junit.jupiter.api.Test;
 
-class GameServerTest
+public class GameServerTest
 {
 	private String signupUsername;
 	private String signupPassword;

@@ -1,3 +1,6 @@
+import org.junit.Test;
+import static org.junit.Assert.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.Collections;
 import java.util.Arrays;
@@ -5,7 +8,7 @@ import java.util.Vector;
 
 import org.junit.jupiter.api.Test;
 
-class DeckTest
+public class DeckTest
 {
 	// Deck exists and is... null? This is in the suite.
 	@Test
