@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 class DealerTest
 {
+	// Test that dealer is not null.
 	@Test
 	public void dealerIsNotNull()
 	{
@@ -14,6 +15,7 @@ class DealerTest
 		assertNotNull(deal);
 	}
 	
+	// Test getting ID is as expected.
 	@Test
 	public void setIsEqualToGet()
 	{
@@ -26,6 +28,7 @@ class DealerTest
 		assertEquals(ID, deal.getDealerID());
 	}
 	
+	// Test that setting dealer ID is not null.
 	@Test
 	public void setDealerIDIsNotNull()
 	{
@@ -38,7 +41,7 @@ class DealerTest
 		assertNotNull(deal.getDealerID());
 	}
 	
-
+	// Test that setting hand is not null.
 	@Test
 	public void setHandIsNotNull()
 	{
