@@ -1,9 +1,12 @@
+import org.junit.Test;
+import static org.junit.Assert.*;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class RankTest
+public class RankTest
 {
 	// Test value returns expected.
 	@Test

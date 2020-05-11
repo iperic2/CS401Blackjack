@@ -1,5 +1,4 @@
-//This program is a jUnit test suite for all classes in CS401BlackJack
-//Current Version is a rough documentation plan for testing
+//This program is a test plan -- consider it a document for tests which should be considered.
 
 import org.junit.*; //import statement for using annotations
 
