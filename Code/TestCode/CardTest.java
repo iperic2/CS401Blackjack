@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 
 public class CardTest
 {
+	// Test constructor is not null.
     @Test
     public void testConstructor()
     {
@@ -12,6 +13,7 @@ public class CardTest
         assertNotNull(kingSpade);
     } 
 
+    // Test that card will not be null.
     @Test
     public void setIsNotNull()
     {
@@ -20,6 +22,7 @@ public class CardTest
     	assertNotNull(tester);
     }
     
+    // Test that suit is as expected.
     @Test
     public void suitIsEqualToGet()
     {
@@ -27,6 +30,7 @@ public class CardTest
         assertEquals(Suit.SPADE, tester.getSuit());
     }
     
+    // Test that rank is as expected.
     @Test
     public void rankIsEqualToGet()
     {
@@ -34,6 +38,7 @@ public class CardTest
         assertEquals(Rank.ACE, tester.getRank());
     }
     
+    // Test that value is as expected.
     @Test
     public void valueIsEqualToGet()
     {
@@ -41,6 +46,7 @@ public class CardTest
         assertEquals(1, tester.getValue());
     }
     
+    // Test that to string is not null.
     @Test
     public void ToStringReturnsNotNull()
     {
