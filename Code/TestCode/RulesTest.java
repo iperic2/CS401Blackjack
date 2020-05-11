@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 class RulesTest
 {
+	// Test not null.
 	@Test
 	public void notNull()
 	{
@@ -15,6 +16,7 @@ class RulesTest
 		assertNotNull(tester);		
 	}
 
+	// Test that outcome is not null.
 	@Test
 	public void equalToNotNull()
 	{
@@ -27,7 +29,7 @@ class RulesTest
 		assertNotNull(tester.gameOutcome());
 	}
 	
-	// the 3 below are to make sure each outcome returns the expected return.
+	// Test outcome is equal to 0.
 	@Test
 	public void equalToZero()
 	{
@@ -40,6 +42,7 @@ class RulesTest
 		assertEquals(0, tester.gameOutcome());
 	}
 	
+	// Test outcome is equal to 1.
 	@Test
 	public void equalToOne()
 	{
@@ -52,6 +55,7 @@ class RulesTest
 		assertEquals(1, tester.gameOutcome());
 	}
 	
+	// Test outcome is equal to 2.
 	@Test
 	public void equalToTwo()
 	{
