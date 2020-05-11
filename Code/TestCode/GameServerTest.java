@@ -9,6 +9,7 @@ class GameServerTest
 	private String loginUsername;
 	private String loginPassword;
 	
+	// Test that sign up user goes through.
 	@Test
 	public void signupUserTest()
 	{
@@ -18,6 +19,7 @@ class GameServerTest
 		signupUsername = input.next();
 	}
 	
+	// Test that sign up user is not null.
 	@Test
 	public void signupUserNotNull()
 	{
@@ -29,6 +31,7 @@ class GameServerTest
 		assertNotNull(signupUsername);
 	}
 
+	// Test that sign up password goes through.
 	@Test
 	public void signupPassTest()
 	{
@@ -38,6 +41,7 @@ class GameServerTest
 		signupPassword = input.next();
 	}
 	
+	// Test that signup password is not null.
 	@Test
 	public void signupPassNotNull()
 	{
@@ -49,6 +53,7 @@ class GameServerTest
 		assertNotNull(signupPassword);
 	}
 	
+	// Test that login user goes through.
 	@Test
 	public void loginUserTest()
 	{
@@ -58,6 +63,7 @@ class GameServerTest
 		loginUsername = input.next();
 	}
 	
+	// Test that login user is not null.
 	@Test
 	public void loginUserNotNull()
 	{
@@ -69,6 +75,7 @@ class GameServerTest
 		assertNotNull(loginUsername);
 	}
 	
+	// Test that login password goes through.
 	@Test
 	public void loginPassTest()
 	{
@@ -78,6 +85,7 @@ class GameServerTest
 		loginUsername = input.next();
 	}
 	
+	// Test that login password is not null.
 	@Test
 	public void loginPassNotNull()
 	{
@@ -89,6 +97,7 @@ class GameServerTest
 		assertNotNull(loginUsername);
 	}
 
+	// Test that user login is equal to user signup.
 	@Test
 	public void userLoginIsEqualToSignup()
 	{
@@ -103,6 +112,7 @@ class GameServerTest
 		assertEquals(loginUsername, signupUsername);
 	}
 	
+	// Test that password login is equal to password signup.
 	@Test
 	public void passLoginIsEqualToSignup()
 	{
