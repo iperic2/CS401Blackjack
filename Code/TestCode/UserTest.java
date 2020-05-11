@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 class UserTest
 {
+	// Test constructor is not null.
 	@Test
 	public void constructorNotNull()
 	{
@@ -12,6 +13,7 @@ class UserTest
 		assertNotNull(tester);
 	}
 	
+	// Test constructor with parameters is not null.
 	@Test
 	public void parameterConstructorNotNull()
 	{	
@@ -23,6 +25,7 @@ class UserTest
 		assertNotNull(tester);
 	}
 	
+	// Test set user is not null.
 	@Test
 	public void setUserNotNull()
 	{
@@ -34,6 +37,7 @@ class UserTest
 		assertNotNull(tester.getUsername());
 	}
 	
+	// Test set password is not null.
 	@Test
 	public void setPassNotNull()
 	{
@@ -45,6 +49,7 @@ class UserTest
 		assertNotNull(tester.getPassword());
 	}
 	
+	// Test username returns expected.
 	@Test
 	public void setUserIsEqualToGet()
 	{
@@ -56,6 +61,7 @@ class UserTest
 		assertEquals(user, tester.getUsername());
 	}
 	
+	// Test password returns expected.
 	@Test
 	public void setPassIsEqualToGet()
 	{
@@ -67,9 +73,16 @@ class UserTest
 		assertEquals(pass, tester.getPassword());
 	}
 	
+	// Test to verify login.
 	@Test
 	public void verifyLoginTest()
 	{
-		// to be worked on.
+		String user = "user";
+		String pass = "pass";
+		
+		User tester = new User(user, pass);
+		
+		assertEquals(user, tester.getUsername());
+		assertEquals(pass, tester.getPassword());
 	}
 }
