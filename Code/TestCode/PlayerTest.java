@@ -6,8 +6,9 @@ import java.util.Vector;
 
 import org.junit.jupiter.api.Test;
 
-class PlayerTest {
-
+class PlayerTest
+{
+	// Test player is not null.
 	@Test
     public void PlayerIsNotNull()
 	{
@@ -23,14 +24,14 @@ class PlayerTest {
         assertNotNull(insertNotNull);
     }
 	
+	// Test get player info returns expected.
 	@Test
 	public void PlayerSetInfoIsEqualToPlayerGetInfo()
 	{
 		Player tester = new Player("user","pass", new Balance(2500, true));
 		
 		String user = "user";
-		String pass = "pass";
-	
+		String pass = "pass";	
 		
 		tester.setUsername(user);
 		assertEquals(user, tester.getUsername());
@@ -38,17 +39,21 @@ class PlayerTest {
 		tester.setPassword(pass);
 		assertEquals(pass, tester.getPassword());
 		
-		// to be worked on
-//		tester.setBalance(amount);
-//		assertEquals(amount, tester.getBalance());
+		BigDecimal amount = new BigDecimal(2500);
+		
+		tester.setBalance(amount);
+		assertEquals(amount, tester.getBalance());
 	}
 
+	// Test current money returns expected.
+	// To be worked on.
 	@Test
 	public void GetCurrentMoneyReturnsExpectedValue()
 	{
-		// to be worked on
+		
 	}
 	
+	// Test creating player doesn't return null.
 	@Test
 	public void OnCreatePlayerDoesNotReturnNull()
 	{
@@ -60,6 +65,7 @@ class PlayerTest {
         assertNotNull(onCreate);
 	}
 	
+	// Test hand doesn't return null.
 	@Test
 	public void SetHandReturnsNotNull()
 	{
@@ -70,6 +76,7 @@ class PlayerTest {
 		tester.setHand(hand);
 	}
 	
+	// Test toString doesn't return null.
 	@Test
 	public void ToStringReturnsNotNull()
 	{
