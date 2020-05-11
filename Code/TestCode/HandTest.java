@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 
 public class HandTest 
 {
+	// Test constructor is not null.
     @Test
     public void constructorIsNotNull()
     {
@@ -15,6 +16,7 @@ public class HandTest
         assertNotNull(cards);
     }
 
+    // Test hand is not null.
     @Test
     public void handIsNotNull()
     {
@@ -23,6 +25,7 @@ public class HandTest
     	assertNotNull(hand);
     }
     
+    // Test that adding a card is not null.
     @Test
     public void addCardIsNotNull()
     {
@@ -34,6 +37,7 @@ public class HandTest
     	assertNotNull(newHand);
     }
     
+    // Test toString method is not null.
     @Test
     public void ToStringIsNotNull()
     {
@@ -43,6 +47,7 @@ public class HandTest
     	assertNotNull(newHand.toString());
     }
     
+    // Test that toString returns expected.
     // to be worked on
     @Test
     public void toStringReturnsExpected()
@@ -58,6 +63,7 @@ public class HandTest
 //    	assertEquals(tester, newHand.toString());
     }
     
+    // Test compare returns expected value.
     // to be worked on
     @Test
     public void compareReturnsExpectedValue()
@@ -70,6 +76,7 @@ public class HandTest
     	// ???    	
     }
     
+    // Test Blackjack works.
     @Test
     public void testBlackjack()
     {
@@ -81,6 +88,7 @@ public class HandTest
         assertTrue(startingHand.isBlackJack());
     }
 
+    // Test bust works.
     @Test
     public void testBust()
     {
