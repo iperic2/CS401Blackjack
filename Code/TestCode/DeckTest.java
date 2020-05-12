@@ -1,23 +1,16 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 import java.util.Collections;
 import java.util.Arrays;
 import java.util.Vector;
 
-import org.junit.jupiter.api.Test;
-
 public class DeckTest
 {
-	// Deck exists and is... null? This is in the suite.
+	// Deck exists and is null?
 	@Test
 	public void DeckExistsAndIsNull()
 	{
-		// this fails...???
-//		Deck deck1 = new Deck();
-//		
-//		assertNull(deck1);
+
 	}
 	
 	// Test that deck is not null.

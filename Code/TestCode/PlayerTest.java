@@ -1,15 +1,9 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.*;
 import java.math.BigDecimal;
-
 import java.util.Vector;
 
-import org.junit.jupiter.api.Test;
-
-class PlayerTest
+public class PlayerTest
 {
 	// Test player is not null.
 	@Test
