@@ -1,54 +1,103 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.math.BigDecimal;
 
 public class BlackJackGUI extends JPanel {
 
-    // GUI constructor
+    private Player player;
+    private DatabaseManagement db;
+
     public BlackJackGUI() {
-
+        player = new Player();
+        db = new DatabaseManagement();
     }
 
-    public void home() {
-        JFrame homeFrame = new JFrame("CS401 Blackjack");
-        JButton registerButton = new JButton("Sign Up");
-        JButton loginButton = new JButton("Sign In");
-        registerButton.setBounds(100, 50, 100, 50);
-        loginButton.setBounds(100, 150, 100, 50);
-        homeFrame.add(registerButton);
-        homeFrame.add(loginButton);
-        homeFrame.setSize(300, 300);
-        homeFrame.setLayout(null);
-        homeFrame.setLocationRelativeTo(null);
-        homeFrame.setVisible(true);
-        homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   final Runnable startApp = new Runnable() {
+        @Override
+        public void run() {
+            JFrame homeFrame = new JFrame("CS401 Blackjack");
+            JButton registerButton = new JButton("Sign Up");
+            JButton loginButton = new JButton("Sign In");
+            registerButton.setBounds(100, 50, 100, 50);
+            loginButton.setBounds(100, 150, 100, 50);
+            homeFrame.add(registerButton);
+            homeFrame.add(loginButton);
+            homeFrame.setSize(300, 300);
+            homeFrame.setLayout(null);
+            homeFrame.setLocationRelativeTo(null);
+            homeFrame.setVisible(true);
+            homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                homeFrame.setVisible(false);
-                if(!login())
-                    homeFrame.setVisible(true);
-                else
-                    menu();
+            loginButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    homeFrame.setVisible(false);
+                    login();
+                    if(player.getUsername().isEmpty() || player.getPassword().isEmpty())
+                        homeFrame.setVisible(true);
+                    else
+                        menu();
+                }
+            });
+
+            registerButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    homeFrame.setVisible(false);
+                    register();
+                    if(player.getUsername().isEmpty() || player.getPassword().isEmpty() || player.getEmail().isEmpty())
+                        homeFrame.setVisible(true);
+                    else
+                        menu();
+                }
+            });
+        }
+    };
+
+    public void login() {
+        JFrame loginFrame = new JFrame();
+        JFrame errorFrame = new JFrame();
+        JPanel loginPanel = new JPanel();
+        loginPanel.setLayout(new GridLayout(0, 2, 2, 2));
+
+        JTextField nameField = new JTextField(10);
+        JTextField passwordField = new JTextField(10);
+
+        loginPanel.add(new JLabel("Username: "));
+        loginPanel.add(nameField);
+
+        loginPanel.add(new JLabel("Password: "));
+        loginPanel.add(passwordField);
+
+        boolean done = false;
+        do {
+            int option = JOptionPane.showConfirmDialog(loginFrame, loginPanel, "Sign in to CS401 Blackjack",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if (option == 0) {
+                player.setUsername(nameField.getText());
+                player.setPassword(passwordField.getText());
             }
-        });
-
-        registerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                homeFrame.setVisible(false);
-                if(!register())
-                    homeFrame.setVisible(true);
-                else
-                    menu();
+            else
+                return;
+            if(player.getUsername().isEmpty() || player.getPassword().isEmpty()) {
+                JOptionPane.showMessageDialog(errorFrame, "Error! Username or password cannot be an empty string.",
+                                              "Error Message", JOptionPane.ERROR_MESSAGE);
+                continue;
             }
-        });
-
+            else if(db.loginVerify(player.getUsername(), player.getPassword()))
+                done = true;
+            else {
+                JOptionPane.showMessageDialog(errorFrame, "Error! Incorrect username or password.",
+                        "Error Message", JOptionPane.ERROR_MESSAGE);
+                continue;
+            }
+            player = db.getPlayer();
+        } while(!done);
     }
 
-    public boolean register() {
-        JFrame registerFrame = new JFrame();
+    public void register() {
+        Frame registerFrame = new JFrame();
         JFrame errorFrame = new JFrame();
         JPanel loginPanel = new JPanel();
         loginPanel.setLayout(new GridLayout(0, 2, 2, 2));
@@ -66,104 +115,59 @@ public class BlackJackGUI extends JPanel {
         loginPanel.add(new JLabel("Email: "));
         loginPanel.add(emailField);
 
-        String username = "";
-        String password = "";
-        String email = "";
         boolean done = false;
         do {
             int option = JOptionPane.showConfirmDialog(registerFrame, loginPanel, "Registration",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
             if (option == 0) {
-                username = nameField.getText();
-                password = passwordField.getText();
-                email = emailField.getText();
+                player.setUsername(nameField.getText());
+                player.setPassword(passwordField.getText());
+                player.setEmail(emailField.getText());
             }
             else
-                return false;
-            if(username.isEmpty() || password.isEmpty() || email.isEmpty()) {
+                return;
+            if(player.getUsername().isEmpty() || player.getPassword().isEmpty() || player.getEmail().isEmpty()) {
                 JOptionPane.showMessageDialog(errorFrame, "Error! Username, password, or email cannot be an " +
-                                              "empty string.", "Error Message", JOptionPane.ERROR_MESSAGE);
+                        "empty string.", "Error Message", JOptionPane.ERROR_MESSAGE);
                 continue;
             }
-            DatabaseManagement db = new DatabaseManagement();
-            if(!db.isExist(username, email)) {
-                db.addNewUser(username, password, email);
+            if(!db.isExist(player.getUsername(), player.getEmail())) {
+                db.addNewUser(player.getUsername(), player.getPassword(), player.getEmail());
+                player.setBalance(BigDecimal.valueOf(2500));
                 done = true;
             }
             else
                 JOptionPane.showMessageDialog(errorFrame, "Error! Username or email is taken.",
-                                              "Error Message", JOptionPane.ERROR_MESSAGE);
-        } while(!done);
-        JOptionPane.showMessageDialog(errorFrame, "Hello, " + username +
-                                      ".\nWelcome to CS401 Blackjack.\n" +
-                                      "You are rewarded with a sign-up bonus of $2500.",
-                                      "Login Message", JOptionPane.INFORMATION_MESSAGE);
-        return true;
-    }
-
-    public boolean login() {
-        JFrame loginFrame = new JFrame();
-        JFrame errorFrame = new JFrame();
-        JPanel loginPanel = new JPanel();
-        loginPanel.setLayout(new GridLayout(0, 2, 2, 2));
-
-        JTextField nameField = new JTextField(10);
-        JTextField passwordField = new JTextField(10);
-
-        loginPanel.add(new JLabel("Username: "));
-        loginPanel.add(nameField);
-
-        loginPanel.add(new JLabel("Password: "));
-        loginPanel.add(passwordField);
-
-        String username = "";
-        String password = "";
-        boolean done = false;
-        do {
-            int option = JOptionPane.showConfirmDialog(loginFrame, loginPanel, "Sign in to CS401 Blackjack",
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
-            if (option == 0) {
-                username = nameField.getText();
-                password = passwordField.getText();
-            }
-            else
-                return false;
-            if(username.isEmpty() || password.isEmpty()) {
-                JOptionPane.showMessageDialog(errorFrame, "Error! Username or password cannot be an empty string.",
-                        "Error Message", JOptionPane.ERROR_MESSAGE);
-                continue;
-            }
-            DatabaseManagement db = new DatabaseManagement();
-            if(db.loginVerify(username, password))
-                done = true;
-            else
-                JOptionPane.showMessageDialog(errorFrame, "Error! Incorrect username or password.",
                         "Error Message", JOptionPane.ERROR_MESSAGE);
         } while(!done);
-        JOptionPane.showMessageDialog(errorFrame, "Hello, " + username + ".\nWelcome back to CS401 Blackjack.",
-                                      "Login Message", JOptionPane.INFORMATION_MESSAGE);
-            return true;
+        JOptionPane.showMessageDialog(errorFrame, "Hello, " + player.getUsername() +
+                        ".\nWelcome to CS401 Blackjack.\n" +
+                        "You are rewarded with a sign-up bonus of $2500.",
+                "Login Message", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void menu() {
         JFrame menuFrame = new JFrame("Main Menu");
         JButton playButton = new JButton("Play");
         JButton profileButton = new JButton("Profile");
+        JButton exitButton = new JButton("Log Out");
         playButton.setBounds(100, 50, 100, 50);
         profileButton.setBounds(100, 150, 100, 50);
+        exitButton.setBounds(100, 250, 100, 50);
         menuFrame.add(playButton);
         menuFrame.add(profileButton);
-        menuFrame.setSize(800, 800);
+        menuFrame.add(exitButton);
+        menuFrame.setSize(800, 600);
         menuFrame.setLayout(null);
         menuFrame.setLocationRelativeTo(null);
         menuFrame.setVisible(true);
-        menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        menuFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         playButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 menuFrame.setVisible(false);
-                display();
+                inGame();
             }
         });
 
@@ -174,10 +178,52 @@ public class BlackJackGUI extends JPanel {
                 profile();
             }
         });
+
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                save();
+                System.exit(0);
+            }
+        });
     }
 
     public void profile() {
+        JFrame frame = new JFrame("Account Profile");
+        JButton menuButton = new JButton("Main menu");
+        JButton exitButton = new JButton("Log Out");
+        menuButton.setBounds(650, 425, 100, 50);
+        exitButton.setBounds(650, 500, 100, 50);
 
+        JPanel userInfoPanel = new JPanel();
+        JLabel infoLabel = new JLabel();
+        infoLabel.setText("username: ");
+        userInfoPanel.add(infoLabel);
+        frame.add(userInfoPanel);
+
+        frame.add(menuButton);
+        frame.add(exitButton);
+        frame.setSize(800, 600);
+        frame.setLayout(null);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        menuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                menu();
+            }
+        });
+
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                save();
+                System.exit(0);
+            }
+        });
     }
 
     // In-game GUI
@@ -272,12 +318,12 @@ public class BlackJackGUI extends JPanel {
 
         //Displays in-game GUI
         JFrame myFrame = new JFrame("BlackJack");
-        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         myFrame.setContentPane(this);
         myFrame.setPreferredSize(new Dimension(800,600));
-
         myFrame.pack();
         myFrame.setVisible(true);
+        myFrame.setLocationRelativeTo(null);
+        myFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         //Button Methods below
         betButton.addActionListener(new ActionListener() {
@@ -326,6 +372,13 @@ public class BlackJackGUI extends JPanel {
                     myFrame.setVisible(true);
                 }
             });
+    }
 
+    public void save() {
+
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }
