@@ -16,6 +16,13 @@ public class Game
 	// number of players
 	private int numPlayer;
 
+	public Game(int numPlayer) {
+		dealer = new Dealer();
+		players = new Vector<>();
+		hands = new Vector<>();
+		this.numPlayer = numPlayer;
+	}
+
 	public Game(Dealer dealer, Vector<Player> players, int numPlayer) {
 		this.dealer = dealer;
 		this.players = players;
@@ -24,50 +31,14 @@ public class Game
 		this.input = new Scanner(System.in);
 	}
 
-	public void newTable() {
-		System.out.println("Welcome to CS401 Blackjack");
-		int nextGame = 1;
-		do {
-			deck = new Deck();
-			deck.shuffleDeck();
-			/*System.out.println("The game will start in 10 seconds.\nPlace your bet: ");
-			new WaitTime();*/
-			System.out.println("Place your bet: ");
-			BigDecimal bet = input.nextBigDecimal();
-			cardsDistribution();
-			displayHand();
-			int option = 0;
-			do {
-				System.out.println("Enter 0 for stand and 1 for hit");
-				option = input.nextInt();
-				if(option == 1) {
-					hands.elementAt(0).addCard(deck.distributeCard());
-					displayHand();
-				}
-			} while(option != 0 && !hands.elementAt(0).isBust());
-			/*new WaitTime();
-			System.out.println("Enter 0 to quit or the next game will start in 10 seconds.");*/
-			dealerDraw();
-			displayFinalResult();
-			rules = new Rules(hands.elementAt(1).handValue(), hands.elementAt(0).handValue());
-			if(rules.gameOutcome() == 0) {
-				System.out.println("It is a draw.");
-				bet = BigDecimal.valueOf(0);
-			}
-			else if(hands.elementAt(0).isBust() || rules.gameOutcome() == 1) {
-				System.out.println("Dealer won.");
-				bet = bet.multiply(new BigDecimal(-1));
-			}
-			else
-				System.out.println("Player won.");
-			players.elementAt(0).setBalance(bet);
-			System.out.println("\nCurrent balance: " + players.elementAt(0).getBalance());
-			System.out.println("\nEnter 0 to quit and any key to the next game.");
-			nextGame = input.nextInt();
-			/*if(nextGame == 0)
-				numPlayer = 0;
-		} while(numPlayer > 0);*/
-		} while(nextGame != 0);
+	public void newGame() {
+		deck = new Deck();
+		deck.shuffleDeck();
+		cardsDistribution();
+	}
+
+	public void hit() {
+		hands.elementAt(0).addCard(deck.distributeCard());
 	}
 
 	public void cardsDistribution() {
@@ -79,6 +50,7 @@ public class Game
 		}
 	}
 
+	// Console debugging purpose
 	public void displayHand() {
 		System.out.println("Dealer Current Hand: " + hands.elementAt(hands.size() - 1).dealerCard() + " [Face Down]");
 		System.out.println("Dealer Current Value: " + hands.elementAt(hands.size() - 1).dealerValue() + '\n');
@@ -89,6 +61,7 @@ public class Game
 		}
 	}
 
+	// Console Debugging purpose
 	public void displayFinalResult() {
 		System.out.println("Dealer Final Hand: " + hands.elementAt(hands.size() - 1).toString());
 		System.out.println("Dealer Final Value: " + hands.elementAt(hands.size() - 1).handValue() + '\n');
@@ -100,10 +73,7 @@ public class Game
 	}
 
 	public void dealerDraw() {
-		while(hands.elementAt(1).handValue() < hands.elementAt(0).handValue() && hands.elementAt(1).handValue() < 22) {
-			System.out.println("Dealer is drawing...");
 			hands.elementAt(1).addCard(deck.distributeCard());
-		}
 	}
 
 	public void setNumPlayer(int numPlayer) {
@@ -114,6 +84,14 @@ public class Game
 	public int getPlayer()
 	{
 		return numPlayer;
+	}
+
+	public Hand getDealerHand() {
+		return hands.elementAt(hands.size() - 1);
+	}
+
+	public Hand getPlayerHand() {
+		return hands.elementAt(0);
 	}
 
 	// reset game

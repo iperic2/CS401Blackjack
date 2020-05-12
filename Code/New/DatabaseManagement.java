@@ -103,5 +103,9 @@ public class DatabaseManagement {
             System.exit(-1);
         }
     }
-    
+
+    public Player getPlayer() {
+        return player;
+    }
+
 }
