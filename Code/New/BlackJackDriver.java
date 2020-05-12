@@ -6,7 +6,7 @@ public class BlackJackDriver
 	public static void main(String[] args)
 	{
 		BlackJackGUI frame = new BlackJackGUI();
-		frame.inGame();
+		frame.profile();
 
 		/*Scanner scan = new Scanner(System.in);
 		
