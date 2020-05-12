@@ -10,7 +10,7 @@ public class BlackJackGUI extends JPanel {
 
     public BlackJackGUI() {
         player = new Player();
-        db = new DatabaseManagement();
+        //db = new DatabaseManagement();
     }
 
    final Runnable startApp = new Runnable() {
@@ -196,17 +196,27 @@ public class BlackJackGUI extends JPanel {
         exitButton.setBounds(650, 500, 100, 50);
 
         JPanel userInfoPanel = new JPanel();
+        //userInfoPanel.setBackground(new Color(0, 125, 0)); //optional green background color
+        setLayout(new BorderLayout());
+        userInfoPanel.setPreferredSize(new Dimension(800, 600));
+        add(userInfoPanel,BorderLayout.CENTER);
+
         JLabel infoLabel = new JLabel();
         infoLabel.setText("username: ");
+        userInfoPanel.setFont(new java.awt.Font("Arial Bold", 1, 20));
+        userInfoPanel.setForeground(Color.black);
         userInfoPanel.add(infoLabel);
-        frame.add(userInfoPanel);
 
-        frame.add(menuButton);
-        frame.add(exitButton);
-        frame.setSize(800, 600);
-        frame.setLayout(null);
-        frame.setLocationRelativeTo(null);
+        userInfoPanel.add(menuButton);
+        userInfoPanel.add(exitButton);
+        add(menuButton,BorderLayout.PAGE_END); //adjusts location of button to bottom of page, can delete
+        add(exitButton,BorderLayout.PAGE_END);
+
+        frame.setContentPane(this);
+        frame.setPreferredSize(new Dimension(800,600));
+        frame.pack();
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         menuButton.addActionListener(new ActionListener() {
