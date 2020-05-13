@@ -41,7 +41,7 @@ public class Card {
 	}
 
 	public String toString() {
-		return '[' + suit.toString() + " - " + rank.toString() + ']';
+		return suit.toString() + " - " + rank.toString();
 	}
 }
 

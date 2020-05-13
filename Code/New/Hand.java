@@ -19,14 +19,16 @@ public class Hand
     // return hand value
 	public int handValue()
 	{
+		Vector<Card> temp = new Vector<>();
+		temp = hand;
 		Comparator c = Collections.reverseOrder(new SortHandDescending());
-		Collections.sort(hand, c);
+		Collections.sort(temp, c);
 	    int value = 0;
-        for(int i = 0; i < hand.size(); ++i) {
-        	if(hand.get(i).getRank() == Rank.ACE && value < 10)
+        for(int i = 0; i < temp.size(); ++i) {
+        	if(temp.get(i).getRank() == Rank.ACE && value < 10)
         		value += 11;
         	else
-            	value += hand.get(i).getValue();
+            	value += temp.get(i).getValue();
         }
         return value;
 	}
@@ -70,4 +72,9 @@ public class Hand
 		return cards;
 	}
 
+	public Card getCard(int index) {
+		return hand.elementAt(index);
+	}
+
 }
+

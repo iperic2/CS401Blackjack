@@ -2,15 +2,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.math.BigDecimal;
+import java.util.Vector;
 
 public class BlackJackGUI extends JPanel {
 
     private Player player;
     private DatabaseManagement db;
+    private Game play;
+    private int playerCardNumber;
+    private int numPlayerHit;
+    private int dealerCardNumber;
+    private int numDealerHit;
 
     public BlackJackGUI() {
         player = new Player();
-        //db = new DatabaseManagement();
+        db = new DatabaseManagement();
+        numPlayerHit = 0;
+        numDealerHit = 0;
     }
 
    final Runnable startApp = new Runnable() {
@@ -196,27 +204,17 @@ public class BlackJackGUI extends JPanel {
         exitButton.setBounds(650, 500, 100, 50);
 
         JPanel userInfoPanel = new JPanel();
-        //userInfoPanel.setBackground(new Color(0, 125, 0)); //optional green background color
-        setLayout(new BorderLayout());
-        userInfoPanel.setPreferredSize(new Dimension(800, 600));
-        add(userInfoPanel,BorderLayout.CENTER);
-
         JLabel infoLabel = new JLabel();
         infoLabel.setText("username: ");
-        userInfoPanel.setFont(new java.awt.Font("Arial Bold", 1, 20));
-        userInfoPanel.setForeground(Color.black);
         userInfoPanel.add(infoLabel);
+        frame.add(userInfoPanel);
 
-        userInfoPanel.add(menuButton);
-        userInfoPanel.add(exitButton);
-        add(menuButton,BorderLayout.PAGE_END); //adjusts location of button to bottom of page, can delete
-        add(exitButton,BorderLayout.PAGE_END);
-
-        frame.setContentPane(this);
-        frame.setPreferredSize(new Dimension(800,600));
-        frame.pack();
-        frame.setVisible(true);
+        frame.add(menuButton);
+        frame.add(exitButton);
+        frame.setSize(800, 600);
+        frame.setLayout(null);
         frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         menuButton.addActionListener(new ActionListener() {
@@ -262,10 +260,10 @@ public class BlackJackGUI extends JPanel {
         //Labels for card visuals
         JLabel playerCard1;
         JLabel playerCard2;
-        JLabel playerCardHit;
+        Vector<JLabel> playerCardsHit = new Vector<>();
         JLabel dealerCard1;
         JLabel dealerCard2;
-        JLabel dealerCardHit;
+        Vector<JLabel> dealerCardsHit = new Vector<>();
 
         topPanel.setBackground(new Color(0, 125, 0));
         dealerPanel.setBackground(new Color(0, 125, 0));
@@ -314,7 +312,7 @@ public class BlackJackGUI extends JPanel {
 
         currentMoney.setAlignmentX(LEFT_ALIGNMENT);
         playerPanel.add(currentMoney);
-        playerMoney.setText("$2500"); //current acct's money should display here
+        playerMoney.setText(player.getBalance().toString()); //current acct's money should display here
         playerMoney.setFont(new java.awt.Font("Arial Bold", 1, 20));
         playerPanel.add(playerMoney);
 
@@ -333,8 +331,9 @@ public class BlackJackGUI extends JPanel {
         myFrame.pack();
         myFrame.setVisible(true);
         myFrame.setLocationRelativeTo(null);
-        myFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        play = new Game(1);
         //Button Methods below
         betButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -346,16 +345,21 @@ public class BlackJackGUI extends JPanel {
             }
          });
 
-        playerCard1 = new JLabel(new ImageIcon("CardImages/back.jpg"));
-        playerCard2 = new JLabel(new ImageIcon("CardImages/back.jpg"));
-        playerCardHit = new JLabel(new ImageIcon("CardImages/back.jpg")); //should be a randomly generated card
-        dealerCard1 = new JLabel(new ImageIcon("CardImages/back.jpg"));
-        dealerCard2 = new JLabel(new ImageIcon("CardImages/back.jpg"));
-        dealerCardHit = new JLabel(new ImageIcon("CardImages/back.jpg")); //should be a randomly generated card
+        playerCard1 = new JLabel(new ImageIcon("back.jpg"));
+        playerCard2 = new JLabel(new ImageIcon("back.jpg"));
+        dealerCard1 = new JLabel(new ImageIcon("back.jpg"));
+        dealerCard2 = new JLabel(new ImageIcon("back.jpg"));
 
         dealButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 myFrame.setVisible(false);
+                play.newGame();
+                play.cardsDistribution();
+                playerCardNumber = 2;
+                dealerCardNumber = 2;
+                dealerCard1.setIcon(getCardImage(getCardImagePath(play.getDealerHand().getCard(0))));
+                playerCard1.setIcon(getCardImage(getCardImagePath(play.getPlayerHand().getCard(0))));
+                playerCard2.setIcon(getCardImage(getCardImagePath(play.getPlayerHand().getCard(1))));
                 dealerPanel.add(dealerCard1);
                 dealerPanel.add(dealerCard2);
                 playerPanel.add(playerCard1);
@@ -368,9 +372,13 @@ public class BlackJackGUI extends JPanel {
         });
 
         hitButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 myFrame.setVisible(false);
-                playerPanel.add(playerCardHit);
+                play.hit();
+                JLabel playerCardHit = new JLabel();
+                playerCardsHit.add(playerCardHit);
+                playerCardsHit.elementAt(numPlayerHit++).setIcon(getCardImage(getCardImagePath(play.getPlayerHand().getCard(playerCardNumber++))));
+                playerPanel.add(playerCardsHit.elementAt(numPlayerHit -  1));
                 myFrame.setVisible(true);
             }
         });
@@ -378,7 +386,10 @@ public class BlackJackGUI extends JPanel {
         holdButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                     myFrame.setVisible(false);
-                    dealerPanel.add(dealerCardHit);
+                    play.dealerDraw();
+                    JLabel playerCardHit = new JLabel();
+                    playerCardsHit.add(playerCardHit);
+                    dealerPanel.add(dealerCardsHit.elementAt(numDealerHit - 1));
                     myFrame.setVisible(true);
                 }
             });
@@ -386,6 +397,75 @@ public class BlackJackGUI extends JPanel {
 
     public void save() {
 
+    }
+
+    public String getCardImagePath(Card card) {
+        String cardImagePath = "";
+        switch(card.getSuit()) {
+            case SPADE:
+                cardImagePath = getRankString(card) + "s.jpg";
+                break;
+            case HEART:
+                cardImagePath = getRankString(card) + "h.jpg";
+                break;
+            case CLUB:
+                cardImagePath = getRankString(card) + "c.jpg";
+                break;
+            case DIAMOND:
+                cardImagePath = getRankString(card) + "d.jpg";
+                break;
+        }
+        return cardImagePath;
+    }
+
+    public ImageIcon getCardImage(String path) {
+        ImageIcon cardImage = new ImageIcon(path);
+        return cardImage;
+    }
+
+    public String getRankString(Card card) {
+        String rankString = "";
+        switch(card.getRank()) {
+            case ACE:
+                rankString = "ace";
+                break;
+            case TWO:
+                rankString = "2";
+                break;
+            case THREE:
+                rankString = "3";
+                break;
+            case FOUR:
+                rankString = "4";
+                break;
+            case FIVE:
+                rankString = "5";
+                break;
+            case SIX:
+                rankString = "6";
+                break;
+            case SEVEN:
+                rankString = "7";
+                break;
+            case EIGHT:
+                rankString = "8";
+                break;
+            case NINE:
+                rankString = "9";
+                break;
+            case TEN:
+                rankString = "10";
+                break;
+            case JACK:
+                rankString = "jack";
+                break;
+            case QUEEN:
+                rankString = "queen";
+                break;
+            case KING:
+                rankString = "king";
+        }
+        return rankString;
     }
 
     public Player getPlayer() {
